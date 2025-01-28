@@ -6,11 +6,11 @@ const serviceKey = require("./service_key.json");
 let app: App;
 
 if (getApps().length === 0) {
-  app = initializeApp({
-    credential: cert(serviceKey),
-  });
+    app = initializeApp({
+        credential: cert(serviceKey),
+    });
 } else {
-  app = getApp();
+    app = getApp();
 }
 
 const adminDb = getFirestore(app);

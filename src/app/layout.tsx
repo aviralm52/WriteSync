@@ -20,7 +20,6 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
-
           <Header />
 
           <div className=" flex min-h-screen">
