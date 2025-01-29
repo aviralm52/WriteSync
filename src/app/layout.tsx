@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
               {children}
             </div>
           </div>
+          <Toaster position="top-center" />
         </body>
       </html>
     </ClerkProvider>

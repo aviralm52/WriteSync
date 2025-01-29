@@ -4,13 +4,21 @@ import { doc, updateDoc } from "firebase/firestore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { FormEvent, useEffect, useState, useTransition } from "react";
 
+import useOwner from "@/lib/useOwner";
+
+import Editor from "./Editor";
 import { Input } from "./ui/input";
 import { db } from "../../firebase";
 import { Button } from "./ui/button";
+import InviteUser from "./InviteUser";
+import ManageUsers from "./ManageUsers";
+import DeleteDocument from "./DeleteDocument";
+import Avatars from "./Avatars";
 
 const Document = ({ id }: { id: string }) => {
   const [isUpdating, startTransition] = useTransition();
   const [data, loading, error] = useDocumentData(doc(db, "documents", id));
+  const isOwner = useOwner();
 
   const [input, setInput] = useState("");
 
@@ -22,7 +30,6 @@ const Document = ({ id }: { id: string }) => {
 
   const updateTitle = (e: FormEvent) => {
     e.preventDefault();
-    console.log("input: ", input);
 
     if (input.trim()) {
       startTransition(async () => {
@@ -32,7 +39,7 @@ const Document = ({ id }: { id: string }) => {
   };
 
   return (
-    <div>
+    <div className=" flex-1 h-full bg-white p-5">
       <div className=" flex max-w-4xl mx-auto justify-between pb-5">
         <form className=" flex flex-1 space-x-2" onSubmit={updateTitle}>
           {/* update title... */}
@@ -45,16 +52,30 @@ const Document = ({ id }: { id: string }) => {
           <Button type="submit" disabled={isUpdating}>
             {isUpdating ? "Updating..." : "Update"}
           </Button>
+
+          {/* IF */}
+          {isOwner && (
+            <>
+              {/* Invite User */}
+              <InviteUser />
+
+              {/* Delete Document */}
+              <DeleteDocument />
+            </>
+          )}
         </form>
       </div>
 
-      <div>
+      <div className=" flex max-w-6xl mx-auto justify-between items-center mb-5">
         {/* Manage Users */}
+        <ManageUsers />
 
         {/* Avatars */}
+        <Avatars />
       </div>
 
       {/* Collaborative Editor */}
+      <Editor />
     </div>
   );
 };

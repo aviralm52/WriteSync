@@ -1,6 +1,8 @@
 "use server";
 
+import liveblocks from "@/lib/liveblocks";
 import { auth } from "@clerk/nextjs/server";
+
 import { adminDb } from "../../firebase-admin";
 
 export async function createNewDocument() {
@@ -26,4 +28,79 @@ export async function createNewDocument() {
     });
 
   return { docId: docRef.id };
+}
+
+export async function deleteDocument(roomId: string) {
+  const { userId, redirectToSignIn, sessionClaims } = await auth();
+
+  if (!userId) redirectToSignIn();
+
+  try {
+    await adminDb.collection("documents").doc(roomId).delete();
+
+    const query = await adminDb
+      .collectionGroup("rooms")
+      .where("roomId", "==", roomId)
+      .get();
+
+    const batch = adminDb.batch();
+
+    // delete the room reference in the user's collection for every user in the room
+    query.docs.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+
+    await batch.commit();
+
+    // delete the room in liveblocks
+    await liveblocks.deleteRoom(roomId);
+
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false };
+  }
+}
+
+export async function inviteUserToDocument(roomId: string, email: string) {
+  const { userId, redirectToSignIn, sessionClaims } = await auth();
+  if (!userId) redirectToSignIn();
+
+  try {
+    await adminDb
+      .collection("users")
+      .doc(email)
+      .collection("rooms")
+      .doc(roomId)
+      .set({
+        userId: email,
+        role: "editor",
+        createdAt: new Date(),
+        roomId,
+      });
+
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false };
+  }
+}
+
+export async function removeUserFromDocument(roomId: string, email: string) {
+  const { userId, redirectToSignIn, sessionClaims } = await auth();
+  if (!userId) redirectToSignIn();
+
+  try {
+    await adminDb
+      .collection("users")
+      .doc(email)
+      .collection("rooms")
+      .doc(roomId)
+      .delete();
+
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false };
+  }
 }
