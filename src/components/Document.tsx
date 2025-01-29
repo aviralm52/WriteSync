@@ -1,5 +1,8 @@
+"use client";
+
 import { doc, updateDoc } from "firebase/firestore";
-import { FormEvent, useState, useTransition } from "react";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { FormEvent, useEffect, useState, useTransition } from "react";
 
 import { Input } from "./ui/input";
 import { db } from "../../firebase";
@@ -7,11 +10,19 @@ import { Button } from "./ui/button";
 
 const Document = ({ id }: { id: string }) => {
   const [isUpdating, startTransition] = useTransition();
+  const [data, loading, error] = useDocumentData(doc(db, "documents", id));
 
   const [input, setInput] = useState("");
 
+  useEffect(() => {
+    if (data) {
+      setInput(data.title);
+    }
+  }, [data]);
+
   const updateTitle = (e: FormEvent) => {
     e.preventDefault();
+    console.log("input: ", input);
 
     if (input.trim()) {
       startTransition(async () => {

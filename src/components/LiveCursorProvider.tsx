@@ -31,6 +31,7 @@ const LiveCursorProvider = ({ children }: { children: React.ReactNode }) => {
             y={presence.cursor!.y}
           />
         ))}
+      {children}
     </div>
   );
 };

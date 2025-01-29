@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { stringToColor } from "@/lib/stringToColor";
 
 const FollowPointer = ({
   x,
@@ -10,7 +11,6 @@ const FollowPointer = ({
   info: { name: string; email: string; avatar: string };
 }) => {
   const color = stringToColor(info.email) || "1";
-  console.log("color: ", color);
 
   return (
     <motion.div
@@ -25,8 +25,8 @@ const FollowPointer = ({
       exit={{ scale: 0, opacity: 0 }}
     >
       <svg
-        width="100"
-        height="100"
+        width="40"
+        height="40"
         viewBox="0 0 100 100"
         stroke={color}
         fill={color}
@@ -45,7 +45,6 @@ const FollowPointer = ({
           stroke-linejoin="round"
         />
       </svg>
-
       <motion.div
         style={{ backgroundColor: color }}
         initial={{ scale: 0.5, opacity: 0 }}
