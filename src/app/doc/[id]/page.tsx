@@ -1,15 +1,12 @@
-"use client";
-
-import { use } from "react";
-
 import Document from "@/components/Document";
 
-const DocumentPage = ({ params }: { params: { id: string } }) => {
-  // const resolvedParams = use(params);
+const DocumentPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+
+  const id = (await params).id;
 
   return (
     <div className=" flex flex-col flex-1 min-h-screen">
-      <Document id={params.id} />
+      <Document id={id} />
     </div>
   );
 };

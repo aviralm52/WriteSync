@@ -14,6 +14,8 @@ import { useRoom, useSelf } from "@liveblocks/react/suspense";
 import "@blocknote/core/style.css";
 import "@blocknote/shadcn/style.css";
 import { Button } from "./ui/button";
+import ChatToDocument from "./ChatToDocument";
+import TranslateDocument from "./TranslateDocument";
 
 type EditorProps = {
   doc: Y.Doc;
@@ -66,17 +68,19 @@ const Editor = () => {
 
   if (!doc || !provider) return null;
 
-  const style = `hover:text-white ${
-    darkMode
-      ? " text-gray-300 bg-gray-700 hover:bg-gray-100 hover:text-gray-700"
-      : " text-gray-700 bg-gray-200 hover:bg-gray-300 hover:text-gray-700"
-  }`;
+  const style = `hover:text-white ${darkMode
+    ? " text-gray-300 bg-gray-700 hover:bg-gray-100 hover:text-gray-700"
+    : " text-gray-700 bg-gray-200 hover:bg-gray-300 hover:text-gray-700"
+    }`;
 
   return (
-    <div className=" max-w-6xl mx-auto">
+    <div className=" max-w-6xl mx-auto border border-neutral-300 rounded-md">
       <div className=" flex items-center gap-2 justify-end mb-10">
         {/* Translate Document */}
+        <TranslateDocument doc={doc} />
+
         {/* Chat To Document */}
+        <ChatToDocument doc={doc} />
 
         {/* Dark Mode */}
         <Button className={style} onClick={() => setDarkMode(!darkMode)}>

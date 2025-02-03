@@ -71,7 +71,7 @@ const Document = ({ id }: { id: string }) => {
         <ManageUsers />
 
         {/* Avatars */}
-        <Avatars />
+        {/* <Avatars /> */}
       </div>
 
       {/* Collaborative Editor */}

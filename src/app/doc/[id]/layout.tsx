@@ -1,15 +1,14 @@
-import { auth } from "@clerk/nextjs/server";
 import RoomProvider from "@/components/RoomProvider";
 
 const DocLayout = async ({
   children,
-  params: { id },
+  params,
 }: {
   children: React.ReactNode;
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) => {
-  const { userId, redirectToSignIn } = await auth();
-  if (!userId) redirectToSignIn();
+
+  const id = (await params).id;
 
   return <RoomProvider roomId={id}>{children}</RoomProvider>;
 };
