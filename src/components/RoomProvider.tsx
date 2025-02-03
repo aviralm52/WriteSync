@@ -19,7 +19,7 @@ const RoomProvider = ({
   return (
     <RoomProviderWrapper id={roomId} initialPresence={{ cursor: null }}>
       <ClientSideSuspense
-        fallback={<LucideLoader2 className=" animate-spin w-12 h-12" />}
+        fallback={<LucideLoader2 className=" animate-spin w-12 h-12 mx-auto" />}
       >
         <LiveCursorProvider>{children}</LiveCursorProvider>
       </ClientSideSuspense>

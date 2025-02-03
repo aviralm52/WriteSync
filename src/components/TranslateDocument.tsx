@@ -31,7 +31,7 @@ const TranslateDocument = ({ doc }: { doc: Y.Doc }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [summary, setSummary] = useState("")
 	const [language, setLanguage] = useState("");
-	const [question, setQuestion] = useState("")
+	const [question] = useState("")
 
 
 

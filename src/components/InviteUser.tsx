@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { usePathname } from "next/navigation";
 import { FormEvent, useState, useTransition } from "react";
 
 import {
@@ -11,14 +12,12 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { deleteDocument, inviteUserToDocument } from "@/actions/actions";
+import { inviteUserToDocument } from "@/actions/actions";
 
-import { Button } from "./ui/button";
-import { toast } from "sonner";
 import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 const InviteUser = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 

@@ -13,11 +13,10 @@ import { Button } from "./ui/button";
 import InviteUser from "./InviteUser";
 import ManageUsers from "./ManageUsers";
 import DeleteDocument from "./DeleteDocument";
-import Avatars from "./Avatars";
 
 const Document = ({ id }: { id: string }) => {
   const [isUpdating, startTransition] = useTransition();
-  const [data, loading, error] = useDocumentData(doc(db, "documents", id));
+  const [data] = useDocumentData(doc(db, "documents", id));
   const isOwner = useOwner();
 
   const [input, setInput] = useState("");

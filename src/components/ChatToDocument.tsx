@@ -1,7 +1,9 @@
 "use client";
 
 import * as Y from "yjs";
-import { usePathname, useRouter } from "next/navigation";
+import { toast } from "sonner";
+import Markdown from "react-markdown";
+import { BotIcon, MessageCircleCode } from "lucide-react";
 import { FormEvent, useState, useTransition } from "react";
 
 import {
@@ -15,9 +17,6 @@ import {
 
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { BotIcon, MessageCircleCode } from "lucide-react";
-import Markdown from "react-markdown";
-import { toast } from "sonner";
 
 const ChatToDocument = ({ doc }: { doc: Y.Doc }) => {
 	const [isPending, startTransition] = useTransition();
@@ -26,11 +25,6 @@ const ChatToDocument = ({ doc }: { doc: Y.Doc }) => {
 	const [summary, setSummary] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
 	const [question, setQuestion] = useState("");
-
-	const router = useRouter();
-	const pathname = usePathname();
-
-	const [email, setEmail] = useState("");
 
 	const handleAskQuestion = async (e: FormEvent) => {
 		e.preventDefault();
