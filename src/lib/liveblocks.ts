@@ -1,13 +1,13 @@
-import { Liveblocks } from "@Liveblocks/node";
+import { Liveblocks } from "@liveblocks/node";
 
 const key = process.env.LIVEBLOCKS_PRIVATE_KEY;
 
 if (!key) {
-  throw new Error("LIVEBLOCKS_PRIVATE_KEY is not defined");
+    throw new Error("LIVEBLOCKS_PRIVATE_KEY is not defined");
 }
 
 const liveblocks = new Liveblocks({
-  secret: key,
+    secret: key,
 });
 
 export default liveblocks;
