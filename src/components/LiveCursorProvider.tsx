@@ -6,9 +6,9 @@ import FollowPointer from "./FollowPointer";
 
 const LiveCursorProvider = ({ children }: { children: React.ReactNode }) => {
   const others = useOthers();
-  const [myPresence, updateMyPresence] = useMyPresence();
+  const [, updateMyPresence] = useMyPresence();
 
-  const handlePointerMove = (e: any) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     // updated from clientX and ClientY to PageX and PageY for full page cursor tracking
     const cursor = { x: Math.floor(e.pageX), y: Math.floor(e.pageY) };
     updateMyPresence({ cursor });

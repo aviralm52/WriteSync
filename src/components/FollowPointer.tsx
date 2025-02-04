@@ -34,15 +34,15 @@ const FollowPointer = ({
       >
         <defs>
           <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1E90FF" />
-            <stop offset="100%" stop-color="#8A2BE2" />
+            <stop offset="0%" stopColor="#1E90FF" />
+            <stop offset="100%" stopColor="#8A2BE2" />
           </linearGradient>
         </defs>
         <path
           d="M15 10L50 90L65 55L90 45L15 10Z"
           fill="url(#gradient)"
           stroke="none"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </svg>
       <motion.div
@@ -52,7 +52,7 @@ const FollowPointer = ({
         exit={{ scale: 0.5, opacity: 0 }}
         className=" px-2 py-2 bg-neutral-200 text-black font-bold whitespace-nowrap min-w-max text-xs rounded-full"
       >
-        {info?.name || info?.email}
+        {info?.email || info?.name}
       </motion.div>
     </motion.div>
   );
