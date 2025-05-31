@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import liveblocks from "@/lib/liveblocks";
 import { auth } from "@clerk/nextjs/server";
 
-import { adminDb } from "../../../firebase-admin";
+import { adminDb } from "../../../../firebase-admin";
 
 export async function POST(req: NextRequest) {
   const { userId, redirectToSignIn, sessionClaims } = await auth();
