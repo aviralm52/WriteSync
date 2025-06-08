@@ -5,6 +5,7 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
+  UserButton,
 } from "@clerk/nextjs";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -34,12 +35,22 @@ const page = () => {
             <Link href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">
               Pricing
             </Link>
-            {/* <Button variant="outline" className="mr-2">
-              Sign In
-            </Button> */}
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+            {/* <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
               Get Started Free
-            </Button>
+            </Button> */}
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+
+            <SignedOut>
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-8 py-6"
+              >
+                <SignInButton />
+              </Button>
+            </SignedOut>
           </nav>
         </div>
       </header>
@@ -74,18 +85,13 @@ const page = () => {
                   <NewDocumentButton />
                 </SignedIn>
 
-                <SignedOut>
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-8 py-6"
-                  >
-                    <SignInButton />
-                  </Button>
-                </SignedOut>
-                <Button variant="outline" size="lg" className="text-lg px-8 py-6 border-2 hover:bg-gray-50">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-8 py-6"
+                >
                   Watch Demo
                 </Button>
+
               </div>
               <div className="flex items-center space-x-6 text-sm text-gray-500">
                 <div className="flex items-center space-x-1">
