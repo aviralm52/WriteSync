@@ -1,7 +1,5 @@
 "use client";
 
-import { LucideLoader2 } from "lucide-react";
-
 import {
   ClientSideSuspense,
   RoomProvider as RoomProviderWrapper,
